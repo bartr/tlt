@@ -1,7 +1,5 @@
 # GitOps Automation
 
-This repository contains the GitOps configurations for managing Kubernetes clusters across multiple retail store locations. Its primary purpose is to automate ring-based deployments of applications across store clusters, allowing controlled rollout of different application versions to specific groups of stores. Rings can be defined either through cluster metadata, enabling flexible deployment strategies. The GitOps Automation tooling combines configuration data with application templates to generate store-specific Kubernetes manifests, with built-in support for rapid rollback in case of deployment issues.
-
 ## Store Modernization with Azure Edge - Domino's
 
 ### The Problem
@@ -53,6 +51,9 @@ Common problem --> Pattern for Retail
 - Chick-Fil-A
 - Circle K
 
+## Overview
+This repository contains the GitOps configurations for managing Kubernetes clusters across multiple retail store locations. Its primary purpose is to automate ring-based deployments of applications across store clusters, allowing controlled rollout of different application versions to specific groups of stores. Rings can be defined either through cluster metadata, enabling flexible deployment strategies. The GitOps Automation tooling combines configuration data with application templates to generate store-specific Kubernetes manifests, with built-in support for rapid rollback in case of deployment issues.
+
 ## Configuration Management
 
 ### Custom Resource Definitions (CRDs)
@@ -64,7 +65,7 @@ For more information on CRDs, see the [Kubernetes documentation on Custom Resour
 The following CRDs are defined in `config/crds.yaml`:
 
 - **Cluster CRD**: Defines the structure for cluster configurations in `clusters.yaml`
-  - Specifies metadata, networking, and infrastructure details for each retail store cluster
+  - Specifies name and metadata details for each retail store cluster
   - Validates cluster-specific configuration parameters
 
 Sample configurations in these YAML files conform to their respective CRD specifications, ensuring consistent and validated configurations across the GitOps workflow.
@@ -85,7 +86,7 @@ The repository uses GitOps Automation (goa), a powerful command-line tool that s
 
 ### Application Templates
 
-The `apps/` directory contains Kubernetes manifest templates that are used to deploy applications to each cluster. These templates leverage Kustomize, a powerful Kubernetes native configuration management tool, allowing multiple versions of applications to coexist and be deployed to different customers. The templates are processed by the GitOps automation process and combined with version information from `apps.yaml` to generate the final manifests for each cluster.
+The `templates/` directory contains Kubernetes manifest templates that are used to deploy applications to each cluster. These templates leverage Kustomize, a powerful Kubernetes native configuration management tool, allowing multiple versions of applications to coexist and be deployed to different customers. The templates are processed by the GitOps automation process based on the `expression:` for each overlay version to generate the final manifests for each cluster.
 
 Using Kustomize with Flux is considered a best practice in GitOps workflows, as it provides powerful capabilities like:
 - Base and overlay configurations for different environments
@@ -96,10 +97,9 @@ Using Kustomize with Flux is considered a best practice in GitOps workflows, as 
 For more information on using Kustomize with Flux, see the [Flux documentation on Kustomize integration](https://fluxcd.io/flux/components/kustomize/kustomization/).
 
 Key applications include:
-- **POS System**: Point of Sale application for retail operations
-- **Ingress Nginx**: Kubernetes ingress controller for routing traffic
-- **Cert Manager**: SSL/TLS certificate management
+- **POS**: Point of Sale application for retail operations
 - **Heartbeat**: Health monitoring and status reporting
+- **Make-Line**: Robotic burrito bowl make line
 
 ### Deployment Rules
 
@@ -242,11 +242,9 @@ This repository uses Arc enabled GitOps (Flux) for GitOps implementation, which:
 
 ```
 .
-├── apps/                 # Kubernetes manifest templates
+├── templates/            # Kubernetes manifest templates
 │   ├── pos/              # Point of Sale system
-│   ├── ingress-nginx/    # Ingress controller
-│   ├── heartbeat/        # Health monitoring
-│   └── cert-manager/     # SSL/TLS certificate management
+│   └── heartbeat/        # Health monitoring
 ├── clusters/             # Generated cluster configurations
 │   ├── tx-austin/        # Austin store cluster
 │   ├── tx-round-rock/    # Round Rock store cluster
