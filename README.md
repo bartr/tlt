@@ -1,5 +1,3 @@
-# GitOps Automation
-
 ## Store Modernization with Azure Edge - Domino's
 
 ### The Problem
@@ -51,7 +49,8 @@ Common problem --> Pattern for Retail
 - Chick-Fil-A
 - Circle K
 
-## Overview
+# GitOps Automation
+
 This repository contains the GitOps configurations for managing Kubernetes clusters across multiple retail store locations. Its primary purpose is to automate ring-based deployments of applications across store clusters, allowing controlled rollout of different application versions to specific groups of stores. Rings can be defined either through cluster metadata, enabling flexible deployment strategies. The GitOps Automation tooling combines configuration data with application templates to generate store-specific Kubernetes manifests, with built-in support for rapid rollback in case of deployment issues.
 
 ## Configuration Management
