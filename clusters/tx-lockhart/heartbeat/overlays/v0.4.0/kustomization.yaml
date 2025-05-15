@@ -6,7 +6,7 @@ metadata:
   annotations:
     version: v0.4.0
     description: Heartbeat App
-    #expression: /m/ring/0
+    expression: /m/ring/0 and /m/oven/ACME4000
 
 resources:
   - ../../base/ns.yaml
