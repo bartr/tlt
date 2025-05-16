@@ -142,7 +142,6 @@ graph LR
         J --> |"/c/*"| K[All Clusters]
         J --> |"/c/tx-austin"| N[Cluster by Name]
         J --> |"/m/ring/0"| L[Ring 0 Metadata]
-        J --> |"/g/ring1"| M[Ring 1 Group]
     end
 
     subgraph "GitOps Automation"
@@ -161,7 +160,6 @@ graph LR
 
     style A fill:#f9f,stroke:#333,stroke-width:2px,color:#000
     style B fill:#f9f,stroke:#333,stroke-width:2px,color:#000
-    style C fill:#f9f,stroke:#333,stroke-width:2px,color:#000
     style E fill:#dfd,stroke:#333,stroke-width:2px,color:#000
     style J fill:#dfd,stroke:#333,stroke-width:2px,color:#000
     style O fill:#f9f,stroke:#333,stroke-width:2px,color:#000
@@ -190,8 +188,6 @@ graph TB
 
     subgraph "Applications"
         E --> K[POS System]
-        E --> M[Ingress Nginx]
-        E --> N[Cert Manager]
         E --> O[Heartbeat]
     end
 
@@ -236,23 +232,6 @@ This repository uses Arc enabled GitOps (Flux) for GitOps implementation, which:
 - Automatically syncs configurations to the appropriate clusters
 - Maintains the desired state of all store environments
 - Provides audit trail of all changes
-
-## Repository Structure
-
-```
-.
-├── templates/            # Kubernetes manifest templates
-│   ├── pos/              # Point of Sale system
-│   └── heartbeat/        # Health monitoring
-├── clusters/             # Generated cluster configurations
-│   ├── tx-austin/        # Austin store cluster
-│   ├── tx-round-rock/    # Round Rock store cluster
-│   ├── tx-pflugerville/  # Pflugerville store cluster
-│   └── ...               # Other store clusters (20 total stores)
-└── config/               # Configuration data
-    ├── clusters.yaml     # Cluster definitions and metadata
-    └── crds.yaml         # Custom Resource Definitions for validation
-```
 
 ## Getting Started
 
