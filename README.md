@@ -199,7 +199,7 @@ The GitOps Automation CLI (`goa`) is a tool for managing GitOps configurations f
 
 - `--config-path, -c` - Specify the configuration directory (default: `./config`)
 - `--template-path, -t` - Specify the template directory (default: `./templates`)
-- `--clusters-dir, -c` - Specify the output directory for generated manifests (default: `./clusters`)
+- `--clusters-path, -p` - Specify the output directory for generated manifests (default: `./clusters`)
 
 ### Generate Manifests
 
