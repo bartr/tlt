@@ -184,3 +184,23 @@ This repository uses Arc enabled GitOps (Flux) for GitOps implementation, which:
 - The initial Arc enabled GitOps configuration creates a `source` that points to the main branch of this repo
 - It also creates a Flux Kustomization configured to watch the `/clusters/clusterName/flux-system/listeners` directory
 - To add additionaly applications, create a `Flux Listener` yaml file in `/clusters/clusterName/flux-system/listeners/kustomization-appName.yaml` that points to the `/clusters/clusterName/appName` directory
+
+## GitOps Automation CLI
+
+The GitOps Automation CLI (`goa`) is a tool for managing GitOps configurations from the base of your repository.
+
+### Key Commands
+
+- `goa gen` - Generate individual K8s manifests for each cluster
+- `goa list clusters` - Lists available clusters defined in YAML files in the config directory
+- `goa list apps` - Lists available application versions defined in the Kustomize directory structure
+
+### Command Options
+
+- `--config-path, -c` - Specify the configuration directory (default: `./config`)
+- `--template-path, -t` - Specify the template directory (default: `./templates`)
+- `--clusters-dir, -c` - Specify the output directory for generated manifests (default: `./clusters`)
+
+### Generate Manifests
+
+The CLI provides a `goa gen` command that combines configuration data with application templates using expression data from `gitopsautomation.yaml` files in the overlay directories. The resulting manifests are written to the clusters directory.
