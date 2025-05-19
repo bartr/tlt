@@ -47,11 +47,11 @@ For more information on using Kustomize with Flux, see the [Flux documentation o
 Key applications include:
 - **POS**: Point of Sale application for retail operations
 - **Heartbeat**: Health monitoring and status reporting
-- **Make-Line**: Robotic burrito bowl make line
+- **Timeclock**: Employee clock in / clock out
 
 ### Deployment Rules
 
-Applications are mapped to clusters using expressions in the `kustomization.yaml` files:
+Applications are mapped to clusters using expressions in the `gitopsautomation.yaml` files:
 
 Expressions are formulas to determine which clusters apply to that expression
 
@@ -166,9 +166,8 @@ graph TB
 ### Applications
 
 - **POS System**: Point of Sale application for retail operations
-- **Ingress Nginx**: Kubernetes ingress controller for routing traffic
-- **Cert Manager**: SSL/TLS certificate management
 - **Heartbeat**: Health monitoring and status reporting
+- **Timecard**: Employee clock in / out
 
 ### Store Clusters
 
@@ -182,29 +181,6 @@ This repository uses Arc enabled GitOps (Flux) for GitOps implementation, which:
 - Maintains the desired state of all store environments
 - Provides audit trail of all changes
 
-## Getting Started
-
-### Prerequisites
-- Kubernetes cluster
-- Flux CD installed
-- kubectl configured
-
-### Deployment
-1. Clone this repository
-2. Configure Flux CD for your cluster
-3. Apply the cluster-specific configurations
-4. Monitor the deployment through Flux CD
-
-## Contributing
-1. Create a new branch for your changes
-2. Make your changes
-3. Submit a pull request
-4. Ensure all tests pass
-5. Get approval from maintainers
-
-## Security
-- Access to the repository is restricted
-- All changes require review and approval
-
-## Support
-For support, please create an issue in this repository
+- The initial Arc enabled GitOps configuration creates a `source` that points to the main branch of this repo
+- It also creates a Flux Kustomization configured to watch the `/clusters/clusterName/flux-system/listeners` directory
+- To add additionaly applications, create a `Flux Listener` yaml file in `/clusters/clusterName/flux-system/listeners/kustomization-appName.yaml` that points to the `/clusters/clusterName/appName` directory
